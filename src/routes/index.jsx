@@ -5,12 +5,12 @@ import WelconePage from "../components/pages/Welcome";
 const routes = [{
         path: '/groups',
         type: 'loggedIn',
-        component: () => <div> hello </div>
+        component: () => < div > groups </div>
     },
     {
         path: '/signin',
         type: 'all',
-        component: < SignInPage />
+        component: <SignInPage/>
     },
     {
         path: '/signup',

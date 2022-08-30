@@ -1,6 +1,6 @@
 import AppStore from "./App";
 import AuthStore from "./Auth";
-// import { observer } from "mobx-react-lite"
+import { observer } from "mobx-react-lite"
 
 class RootStore {
     constructor() {

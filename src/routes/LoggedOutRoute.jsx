@@ -9,8 +9,8 @@ const LoggedOutRoute = observer((props) => {
     } = store
     if (!appStore.isLoggedIn) {
         return ( 
-            <Route {...rest }
-            strict > { children }
+          <Route {...rest }
+            strict > { children } 
             </Route>
         )
     }

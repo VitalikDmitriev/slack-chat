@@ -1,8 +1,8 @@
 import { Container, Grid } from "@mui/material";
-import SignInForm from '../../forms/SignIn'
+import SignInForm from "../../forms/SignIn/SignInForm";
+
 const SignInPage = () => {
-    return ( 
-        <Container >
+    return ( <Container> 
         <Grid container justifyContent = 'center'
         alignContent = 'center'
         alignItems = 'center'
@@ -10,10 +10,10 @@ const SignInPage = () => {
             { height: '100vh' }
         } >
         <Grid item xs = { 12 }
-        sm = { 8 } >
+        sm = { 8 }>
         <SignInForm />
-        </Grid> 
         </Grid>
+        </Grid > 
         </Container>
     )
 }
