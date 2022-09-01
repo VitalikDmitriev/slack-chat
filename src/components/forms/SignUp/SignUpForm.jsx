@@ -1,6 +1,6 @@
-import { Grid, Paper, Button, Typography, Container } from "@mui/material";
+import { Grid, Paper, Button, Typography, Container, Alert } from "@mui/material";
 import { Box } from "@mui/material";
-
+import signup  from '../../../store/Auth';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import LockIcon from '@mui/icons-material/Lock';
@@ -11,6 +11,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ControlledInput from "../../ui/ControlledInput";
 import * as yup from "yup";
 import { useHistory } from "react-router";
+import { auth } from '../../../firebase';
+import { useState } from "react";
 
 const Schema = yup.object({
     firstname: yup.string().required('Введите имя пользователя').min(3, 'Слишком коротрое имя'),
@@ -26,10 +28,21 @@ const SignUpForm = observer(() => {
         resolver: yupResolver(Schema),
     });
     const router = useHistory()
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const onSubmit = async (data) => {
-        console.log(data)
-    }
+        try{
+            setError('')
+            setLoading(true)
+            // Тут измени чутка я же функцию для того чтобы это не писать долго написал
+            await auth.createUserWithEmailAndPassword(data.email, data.password)
+            router.push('/')
+        } catch {
+            setError('Failed to log up')
+        }
+        
+    } 
 
     const handleOnRedirect = () => {
         router.push('/signin')
@@ -111,9 +124,10 @@ const SignUpForm = observer(() => {
                         SignUp
                     </Button>
                 </Grid>
+                <Grid item xs={18} sm={12}>
+                    {error && <Alert severity="error">{error}</Alert>}
                 </Grid>
-               
-          
+                </Grid>               
             </Box>
             </Box>
        </Container>

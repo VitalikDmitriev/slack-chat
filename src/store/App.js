@@ -3,7 +3,6 @@ import { makeAutoObservable } from "mobx";
 class AppStore {
     constructor(rootStore) {
         this.rootStore = rootStore;
-        // '' -> false undefined => false 'dsdsadasdasdas' -> true
         this.isLoggedIn = !!this.getAccessToken();
         makeAutoObservable(this, { rootStore: false })
     }

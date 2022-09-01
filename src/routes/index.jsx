@@ -1,6 +1,6 @@
 import SignInPage from "../components/pages/SignIn";
 import SignUpPage from "../components/pages/SignUp/SignUp";
-import WelconePage from "../components/pages/Welcome";
+import Dashboards from "../components/pages/Dashboard/Dashboard";
 
 const routes = [{
         path: '/groups',
@@ -19,8 +19,8 @@ const routes = [{
     },
     {
         path: '/',
-        type: 'all',
-        component: < WelconePage />
+        type: 'loggedIn',
+        component: < Dashboards />
     },
 ];
 

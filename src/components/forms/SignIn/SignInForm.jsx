@@ -1,4 +1,4 @@
-import { Grid, TextField, Button, Typography } from "@mui/material";
+import { Grid, TextField, Button, Typography, AlertTitle } from "@mui/material";
 import { Paper } from "@mui/material";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -11,6 +11,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ControlledInput from "../../ui/ControlledInput";
 import { useHistory } from 'react-router'
+import { auth } from '../../../firebase'
+import { useState } from "react";
+import { Alert } from "@mui/material";
+
 
 const Schema = yup.object({
     email: yup.string().required('Введите email').email("Невалидный email"),
@@ -20,6 +24,9 @@ const Schema = yup.object({
 const SignInForm = observer(() => {
     const { authStore }= store;
     const router = useHistory()
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+  
 
     const form = useForm({
         resolver: yupResolver(Schema),
@@ -27,7 +34,15 @@ const SignInForm = observer(() => {
 
 
     const onSubmit = async (data) => {
-        console.log(data);
+        try{
+          setError('')
+          setLoading(true)
+           // Тут измени чутка я же функцию для того чтобы это не писать долго написал
+          await auth.signInWithEmailAndPassword(data.email, data.password)
+          router.push('/')
+        } catch {
+          setError('Failed to log in')
+        }
     }
 
     const handleOnRedirect = () => {
@@ -81,6 +96,9 @@ const SignInForm = observer(() => {
                          SignIn
                         </Button>
                     </Grid>
+                    <Grid item xs={18} sm={18}>
+                       {error && <Alert severity="error">{error}</Alert>} 
+                    </Grid>                
                   </Grid>
                 </Box> 
               </Box>
@@ -91,3 +109,7 @@ const SignInForm = observer(() => {
 })
 
 export default SignInForm;
+
+
+
+
