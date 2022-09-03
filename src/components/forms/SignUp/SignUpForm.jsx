@@ -13,6 +13,9 @@ import * as yup from "yup";
 import { useHistory } from "react-router";
 import { auth } from '../../../firebase';
 import { useState } from "react";
+import firebase from 'firebase/compat/app';
+
+
 
 const Schema = yup.object({
     firstname: yup.string().required('Введите имя пользователя').min(3, 'Слишком коротрое имя'),
@@ -30,6 +33,7 @@ const SignUpForm = observer(() => {
     const router = useHistory()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
+    // const [currentUser, setCurrentUser] = useState()
 
     const onSubmit = async (data) => {
         try{
@@ -37,6 +41,31 @@ const SignUpForm = observer(() => {
             setLoading(true)
             // Тут измени чутка я же функцию для того чтобы это не писать долго написал
             await auth.createUserWithEmailAndPassword(data.email, data.password)
+
+                         // тут понятное дело надо сделать по человечески 
+
+                  firebase.auth().onAuthStateChanged(function(user){
+                    if (user){
+                        user.updateProfile({
+                            displayName: (data.firstname),
+                        }) .then(function() {
+                            const names = user.displayName;
+                        }, function(error){ 
+                        })
+                    }
+                }) 
+
+                firebase.auth().onAuthStateChanged(function(user){
+                    if (user){
+                        user.updateProfile({
+                            displaySecondName: (data.secondname),
+                        }) .then(function() {
+                            const names = user.displaySecondName;
+                        }, function(error){ 
+                        })
+                    }
+                }) 
+          // ты сам знаешь что нужно сделать 
             router.push('/')
         } catch {
             setError('Failed to log up')

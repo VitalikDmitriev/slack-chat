@@ -22,6 +22,7 @@ const Schema = yup.object({
 });
 
 const SignInForm = observer(() => {
+  
     const { authStore }= store;
     const router = useHistory()
     const [error, setError] = useState("")
