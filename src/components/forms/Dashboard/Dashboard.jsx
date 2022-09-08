@@ -4,36 +4,20 @@ import { useAuth } from '../../../store/Auth'
 import { useHistory } from 'react-router-dom'
 import { observer } from "mobx-react-lite";
 import { Typography, Grid, Button } from '@mui/material';
+import Panel from './ElementsDashboard/Panel'
+import Left from './ElementsDashboard/Left';
+import { Box, Stack } from '@mui/system';
+import Center from './ElementsDashboard/Center';
 
 const Dashboard = observer(() => {
-
-    const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
-    const router = useHistory()
-    
-    async function handleLogout() {
-        setError("")
-    
-        try {
-          await logout()
-          router.push("/signin")
-        } catch {
-          setError("Failed to log out")
-        }
-      }
-
     return (
-        <Grid>
-                <Typography component="h2" variant="h19">
-                     Email: {currentUser.email}
-                     Name: {currentUser.displayName}
-                     {/* SeconName: {currentUser.display} */}
-
-                </Typography>
-                <Button fullWidth type='submit' onClick={handleLogout}>
-                Logout
-            </Button>
-        </Grid>
+        <Box spacing={1}>
+            <Panel/>  
+             <Stack direction='row' spacing={0}>
+                 <Left/>
+                 <Center/>
+             </Stack>
+        </Box>
               
        
     )

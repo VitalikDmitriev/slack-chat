@@ -1,7 +1,7 @@
 import SignInPage from "../components/pages/SignIn";
 import SignUpPage from "../components/pages/SignUp/SignUp";
 import Dashboards from "../components/pages/Dashboard/Dashboard";
-import Tables from "../components/pages/Table/Table";
+
 
 const routes = [{
         path: '/groups',
@@ -22,11 +22,6 @@ const routes = [{
         path: '/',
         type: 'loggedIn',
         component: < Dashboards />
-    },
-    {
-        path: '/table',
-        type: 'all',
-        component: < Tables/ >
     },
 ];
 

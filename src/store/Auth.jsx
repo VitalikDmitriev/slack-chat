@@ -62,10 +62,6 @@ export function AuthProvider({ children }) {
         return auth.signOut()
     }
 
-    function nameuser(){
-        return currentUser.name('')
-    }
-
     function resetPassword(email) {
         return auth.sendPasswordResetEmail(email)
     }
@@ -88,7 +84,6 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser,
-        nameuser,
         login,
         signup,
         logout,

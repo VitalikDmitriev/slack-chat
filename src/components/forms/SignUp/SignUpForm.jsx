@@ -39,33 +39,23 @@ const SignUpForm = observer(() => {
         try{
             setError('')
             setLoading(true)
-            // Тут измени чутка я же функцию для того чтобы это не писать долго написал
-            await auth.createUserWithEmailAndPassword(data.email, data.password)
-
                          // тут понятное дело надо сделать по человечески 
-
-                  firebase.auth().onAuthStateChanged(function(user){
+                await firebase.auth().onAuthStateChanged(function(user){
                     if (user){
                         user.updateProfile({
                             displayName: (data.firstname),
+                            SecondName: (data.lastname),
+                            
                         }) .then(function() {
                             const names = user.displayName;
-                        }, function(error){ 
-                        })
-                    }
-                }) 
-
-                firebase.auth().onAuthStateChanged(function(user){
-                    if (user){
-                        user.updateProfile({
-                            displaySecondName: (data.secondname),
-                        }) .then(function() {
-                            const names = user.displaySecondName;
+                            const lastnames = user.SecondName;
                         }, function(error){ 
                         })
                     }
                 }) 
           // ты сам знаешь что нужно сделать 
+           // Тут измени чутка я же функцию для того чтобы это не писать долго написал
+           await auth.createUserWithEmailAndPassword(data.email, data.password)
             router.push('/')
         } catch {
             setError('Failed to log up')
