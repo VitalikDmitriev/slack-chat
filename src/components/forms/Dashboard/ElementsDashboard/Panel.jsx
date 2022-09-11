@@ -66,8 +66,6 @@ const Panel = () => {
                             backgroundColor: '#7D7F7D',
                             color: 'white'
                             }
-
-
                         }}
                         variant='contained' 
                         startIcon={<ExitToAppIcon/>}  

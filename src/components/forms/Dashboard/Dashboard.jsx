@@ -13,7 +13,7 @@ const Dashboard = observer(() => {
     return (
         <Box spacing={1}>
             <Panel/>  
-             <Stack direction='row' spacing={0}>
+             <Stack direction='row'>
                  <Left/>
                  <Center/>
              </Stack>
